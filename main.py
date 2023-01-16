@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
+from datetime import datetime
 import os
 
 with open('wetaca.html', 'r', encoding='utf-8') as file:
@@ -34,5 +35,7 @@ for i, name in enumerate(names):
     ws.cell(row=i+4, column=3).value = price
     row_count += 1
 
+now = datetime.now()
+date_string = now.strftime("%d%m%y")
 my_docs = 'C:/Users/i81345/OneDrive - Verisk Analytics/Documents'
-wb.save(os.path.join(my_docs, 'Wetaca.xlsx'))
+wb.save(os.path.join(my_docs, f"{date_string}_Wetaca.xlsx"))
