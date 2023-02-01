@@ -6,8 +6,8 @@ import os
 with open('wetaca.html', 'r', encoding='utf-8') as file:
     html = file.read()
     soup = BeautifulSoup(html, 'html.parser')
-name_elements = soup.find_all('div', class_='txt-action txt-action-s m-b-32 m-b-24-s')
-price_elements = soup.find_all('div', class_='txt-p-1 txt-overline-s')
+name_elements = soup.find_all('div', class_='txt-action txt-action-s')
+price_elements = soup.find_all('div', class_='txt-p-1 txt-p-1-s')
 
 names = []
 prices = []
