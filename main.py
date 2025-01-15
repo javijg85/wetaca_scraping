@@ -6,19 +6,19 @@ import os
 with open('wetaca.html', 'r', encoding='utf-8') as file:
     html = file.read()
     soup = BeautifulSoup(html, 'html.parser')
-name_elements = soup.find_all('div', class_='txt-action txt-action-s')
-price_elements = soup.find_all('div', class_='txt-p-1 txt-p-1-s')
+
+name_elements = soup.find_all('div', class_='modul-info')
+price_elements = soup.find_all('div', class_='cardMenuItem-module_card-quantity__HzmE5')
 
 names = []
 prices = []
 for name_element in name_elements:
-    names.append(name_element.text)
+    names.append(name_element.find('div', class_='txt-p-1 txt-p-1-s txt-hyphens-auto-s').text)
 
 for price_element in price_elements:
-    prices.append(price_element.text)
+    prices.append(price_element.find('div', class_='txt-p-1 txt-p-1-s').text)
 
 product_prices = dict(zip(names, prices))
-
 
 wb = load_workbook('WetacaTemplate.xlsx')
 
@@ -31,7 +31,7 @@ for i, name in enumerate(names):
     if row_count > 46:
         break
     ws.cell(row=i+4, column=2).value = name
-    price = float(prices[i].replace("€", "").replace(",","."))
+    price = float(prices[i].replace("€", "").replace(",", "."))
     ws.cell(row=i+4, column=3).value = price
     row_count += 1
 
